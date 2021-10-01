@@ -47,12 +47,11 @@ async function getUserCart(userId) {
 
 async function deleteFromCart({sushiId, userId}) {
     
-    const user = await User.findById(userId)
-    // const sushi = user.cart.filter(s => s.id !== sushiId)
-    console.log(sushi);
+    const user = await User.findById(userId);
+    user.cart = user.cart.filter(s => s.id !== sushiId);
 
-    //  delete sushi;
-     return sushi;
+    user.save();
+    return user.cart;
 }
 
 

@@ -13,17 +13,21 @@ const Cart = () => {
     const [user, setUser] = useContext(Context);
     const [cart, setCart] = useState([]);
 
-    //Getting user cart array
+    //Getting user cart array------------------------------------------------
     useEffect(() => {
         getUserCart(user._id)
-          .then(res => setCart(res))
+          .then(res => {
+              console.log(res);
+              setCart(res)
+            })
           .catch((error) => console.log(error.message));
     },[]);
 
-    //Delete product from cart
+    //Delete product from cart -----------------------------------------------
     const deleteHandler = (sushiId, userId) => {
         
-          deleteFromCart(sushiId, userId);
+          deleteFromCart(sushiId, userId)
+            .then(cart => setCart(cart));
     }
 
 
@@ -43,7 +47,7 @@ const Cart = () => {
                             <td>{sushi.title}</td>
                             <td>{'x' + sushi.qty}</td>
                             <td>{(sushi.price * sushi.qty).toFixed(2)+'BGN'}</td>
-                            <td><button onClick={deleteHandler(sushi.id, user._id)}><TiDeleteOutline/></button></td>
+                            <td><button onClick={deleteHandler.bind(this, sushi.id, user._id)}><TiDeleteOutline/></button></td>
                         </tr>
                         
                     </tbody>

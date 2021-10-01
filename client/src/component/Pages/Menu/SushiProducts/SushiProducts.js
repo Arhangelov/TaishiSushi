@@ -35,7 +35,7 @@ function Tilt(props) {
 //Component
 export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
     const [user, setUser] = useContext(Context);
-    const [qty, setQty] = useState(0);
+    const [qty, setQty] = useState(1);
     const sushiData = {id, title, imageUrl, price}
     const dispatch = useDispatchCart();
 
@@ -55,7 +55,7 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
 
     //Decrement logic
     const decrement = () => {
-        if(!qty == 0)
+        if(!qty == 1)
             setQty(qty - 1)
     }
 
@@ -68,11 +68,11 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
         <> 
         <Tilt options={options}>
             <Card to={`/menu/details/${id}`}>
-                <SetImage src={`${imageUrl}`} alt={`${title}`} />
+                <SetImage src={imageUrl} alt={`${title}`} />
             </Card>
                 <SetPrice>{`${price.toFixed(2)} BGN`}</SetPrice>
-                <SetTitle> {`${title}`} </SetTitle>
-                <SetPortion>{`${portion}`}</SetPortion>
+                <SetTitle> {title} </SetTitle>
+                <SetPortion>{portion}</SetPortion>
                 <QtyDiv>
                     <Decrement onClick={decrement}>-</Decrement>
                     <SetQty value={qty}></SetQty>
