@@ -1,5 +1,6 @@
 const url = `http://localhost:5001/`;
 const urlMenu = `http://localhost:5001/menu/`;
+const urlCart = `http://localhost:5001/cart/`;
 
 export const addSushi = ( sushiData ) => {
     return fetch(url + 'add', {
@@ -48,7 +49,6 @@ export const getUserCart = (userId) => {
 }
 
 export const deleteFromCart = (sushiId, userId) => {
-    console.log(sushiId, userId);
     return fetch(urlMenu + 'delete-from-cart', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
@@ -56,6 +56,11 @@ export const deleteFromCart = (sushiId, userId) => {
     }).then(res => res.json())
 }
 
-export const getQty = (title) => {
-    return fetch()
+export const finishOrder = ( userId, finalPrice ) => {
+    return fetch(urlMenu + 'finish-order/' + `${userId}/` + `${finalPrice}`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'}
+    }).then(res => res.json())
 }
+
+

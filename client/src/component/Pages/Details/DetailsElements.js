@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+
 export const Container = styled.div`
     display: flex;
     gap: 3em;
     margin: 3%;
+    
     /* transform-style: preserve-3d;
     transform: perspective(900px); */
 `

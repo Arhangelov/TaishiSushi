@@ -19,23 +19,22 @@ async function getDetails (id) {
 };
 
 async function addToCart (data) {
-    const user = await User.findById(data.userId)
-    console.log('[DEBUG]', user.cart, data.qty)
-
-    delete data.userId
-
-    const currentSushi = user.cart.find(s => s.title === data.title)
-    const index = user.cart.indexOf(currentSushi)
-
+    const user = await User.findById(data.userId);
+    
+    delete data.userId;
+    
+    const currentSushi = user.cart.find(s => s.title === data.title);
+    
     if(currentSushi) {
-        user.cart[index].qty += data.qty;
+        user.cart.remove(currentSushi);
+        currentSushi.qty += data.qty;
+        user.cart.push(currentSushi);
 
     } else {
         user.cart.push(data)
     }
 
-    console.log(['USER CART'], user.cart)
-    return user.save() 
+    return user.save(); 
 };
 
 async function getUserCart(userId) {
@@ -52,6 +51,25 @@ async function deleteFromCart({sushiId, userId}) {
 
     user.save();
     return user.cart;
+};
+
+async function finishOrder({ userId, finalPrice }) {
+    let showDate = new Date();
+    let currDate = showDate.getDate()+'/'+(showDate.getMonth()+1);
+
+    
+    const user = await User.findById(userId);
+    const cart = user.cart;
+    
+    if(!user.cart.length == 0) {
+        user.purchaseHistory.push({currDate, cart, finalPrice});
+        user.cart = [];
+    } else {
+        throw new Error(`You'r cart is empty`);
+    }
+
+
+    return user.save();
 }
 
 
@@ -63,5 +81,6 @@ module.exports = {
     getDetails,
     addToCart,
     getUserCart,
-    deleteFromCart
+    deleteFromCart,
+    finishOrder
 }

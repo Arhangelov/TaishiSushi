@@ -7,6 +7,16 @@ const reducer = (state, action) => {
     switch(action.type){
         case 'ADD':
             return[...state, action.sushi];
+        case "REMOVE":
+            return state.filter((sushi) => sushi.id !== action.sushiId);
+        case "UPDATE":
+            return action.sushi;
+        case "CHANGE":
+            const index = state.findIndex(
+              (p) => p.id === action.sushi.id
+            );
+            if (index >= 0) state[index] = action.sushi;
+      return JSON.parse(JSON.stringify(state));
         default:
             throw new Error(`unknown action ${action.type}`)
     }

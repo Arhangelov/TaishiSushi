@@ -52,7 +52,7 @@ const Navbar = () => {
                 ?  <>
                     <NavLink to='' onClick={handlerLogout}>LOGOUT</NavLink>
                     <NavLink to='/profile'>{user.username}</NavLink>
-                    <NavLink to='/cart'><i class="fas fa-shopping-cart"/> ({items.length})</NavLink>
+                    <NavLink to='/cart'><i className="fas fa-shopping-cart"/> ({items.length})</NavLink>
                     </>
                  : <>
                     <NavLink to='/register'>REGISTER</NavLink>

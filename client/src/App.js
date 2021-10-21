@@ -15,8 +15,9 @@ import Cart from "./component/Pages/Cart/Cart";
 import SelectedType from "./component/Pages/Menu/SelectedType/SelectedType";
 import Details from './component/Pages/Details/Details';
 import Footer from './component/Footer/Footer';
+import TakenOrder from './component/Pages/TakenOrder/TakenOrder';
 
-import ImgBg from "./resources/Background.png";
+
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
             <Route path='/register' exact component={RegisterPage} />
             <Route path='/add' exact component={AddPage} />
             <Route path='/cart' exact component={Cart} />
+            <Route path='/finish-order' exact component={TakenOrder} />
         </Switch>
         <Footer />
     </div>

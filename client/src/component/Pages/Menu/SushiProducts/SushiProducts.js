@@ -42,7 +42,6 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
     const addToCart = (sushi, userId, currQty) => {
         dispatch({ type: 'ADD', sushi})
         pushToCart(sushi, userId, currQty)
-            .then(response => console.log(response))
     };
 
     //Tilt options
@@ -79,7 +78,6 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
                     <Increment onClick={increment}>+</Increment>
                 </QtyDiv>
                 <CartBtn onClick={() => addToCart(sushiData, user._id, qty)}>Add to Cart</CartBtn>
-                <div>{qty}</div>
         </Tilt>
         </>
     )

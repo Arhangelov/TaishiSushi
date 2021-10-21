@@ -22,7 +22,28 @@ export const P = styled.p`
 
 `;
 
-export const GridContainer = styled.div`
+export const Background = styled.div`
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding-top: 60px;
+  background: linear-gradient(
+      0deg,
+      rgba(125, 56, 87, 1) 0%,
+      rgba(255, 126, 58, 1) 100%
+    )
+    no-repeat top right;
+  @media only screen and (max-width: 580px) {
+    padding-top: 130px;
+  }
+
+  @media only screen and (max-width: 636px) {
+    height: auto;
+  }
+
+`
+
+export const Container = styled.div`
   display: grid;
   gap: 1em;
   
@@ -37,7 +58,13 @@ export const GridContainer = styled.div`
   text-align: center;
   cursor: pointer;
   background: linear-gradient(0deg, rgba(125,56,87,1) 0%, rgba(255,126,58,1) 100%);
-
+  /* padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center; */
 `;
 
 export const CardType1 = styled.div`

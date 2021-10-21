@@ -1,11 +1,10 @@
 const router = require('express').Router();
 
-const { getType, getDetails, addToCart, getUserCart, deleteFromCart } = require('../services/sushiService');
+const { getType, getDetails, addToCart, getUserCart, deleteFromCart, finishOrder } = require('../services/sushiService');
 
 router.get('/sets', (req, res) => {
     getType('Set')
         .then(sushi => {
-            console.log(sushi);
             res.json(sushi);
         });
 });
@@ -13,7 +12,6 @@ router.get('/sets', (req, res) => {
 router.get('/uramaki', (req, res) => {
     getType('Uramaki')
         .then(sushi => {
-            console.log(sushi);
             res.json(sushi);
         });
 });
@@ -21,7 +19,6 @@ router.get('/uramaki', (req, res) => {
 router.get('/futomaki', (req, res) => {
     getType('Futomaki')
         .then(sushi => {
-            console.log(sushi);
             res.json(sushi);
         });
 });
@@ -29,7 +26,6 @@ router.get('/futomaki', (req, res) => {
 router.get('/hosomaki', (req, res) => {
     getType('Hosomaki')
         .then(sushi => {
-            console.log(sushi);
             res.json(sushi);
         });
 });
@@ -37,7 +33,7 @@ router.get('/hosomaki', (req, res) => {
 router.get('/nigiri', (req, res) => {
     getType('Nigiri')
         .then(sushi => {
-            console.log(sushi);
+
             res.json(sushi);
         });
 });
@@ -45,7 +41,6 @@ router.get('/nigiri', (req, res) => {
 router.get('/sashimi', (req, res) => {
     getType('Sashimi')
         .then(sushi => {
-            console.log(sushi);
             res.json(sushi);
         });
 });
@@ -53,7 +48,6 @@ router.get('/sashimi', (req, res) => {
 router.get('/details/:id', (req, res) => {
     getDetails(req.params.id)
         .then(sushiDetails => {
-            console.log((sushiDetails));
             res.json(sushiDetails);
         });
 });
@@ -71,7 +65,6 @@ router.get('/get-cart/:userId', (req, res) => {
 
     getUserCart(req.params.userId)
         .then(cart => {
-            console.log(cart);
             res.json(cart);
         });
 });
@@ -82,6 +75,15 @@ router.post('/delete-from-cart/', (req, res) => {
         .then(cart => {
             res.json(cart)
         })
+});
+
+router.post('/finish-order/:userId/:finalPrice', (req, res) => {
+
+    finishOrder(req.params)
+        .then(history => {
+            res.json(history)
+        })
+    
 })
 
 module.exports = router;
