@@ -19,9 +19,9 @@ export const Menu = () => {
   return (
     <Background>
       <Container>
-        <CardType6>
-          <LinkTo to='/menu/sets'>Set</LinkTo>
-        </CardType6>
+          <CardType6>
+              <LinkTo to='/menu/sets'>Set</LinkTo>    
+          </CardType6>
     
         <CardType1>
           <LinkTo to='/menu/futomaki'>Futomaki</LinkTo>

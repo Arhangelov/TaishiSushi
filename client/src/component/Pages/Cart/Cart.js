@@ -97,7 +97,7 @@ const Cart = () => {
                     <div>Total Price: {totalPrice.toFixed(2)}BGN</div>
 
                     <button onClick={finishOrderHandler.bind(this, user._id, totalPrice )}>
-                        <Link to='/finish-order'>Finish you'r order</Link>
+                        <Link to='/finish-order'>Finish your order</Link>
                     </button>              
                 </>
             )}

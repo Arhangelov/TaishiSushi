@@ -1,7 +1,7 @@
 import "./App.css";
 
-import { useEffect, useState, useContext } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import { Route, Switch } from "react-router-dom";
 import {getUser} from './services/getUser';
 import { Context } from './Context/UserContext';
 
@@ -9,6 +9,7 @@ import Navbar from "./component/Navbar/Navbar";
 import HomePage from "./component/Pages/HomePage/HomePage";
 import AddPage from "./component/Pages/AddPage/AddPage";
 import LoginPage from "./component/Pages/LoginPage/LoginPage";
+import ProfilePage from "./component/Pages/Profile/Profile";
 import RegisterPage from "./component/Pages/RegisterPage/RegisterPage";
 import Menu from "./component/Pages/Menu/Menu";
 import Cart from "./component/Pages/Cart/Cart";
@@ -21,7 +22,7 @@ import TakenOrder from './component/Pages/TakenOrder/TakenOrder';
 
 function App() {
 
-  const [user, setUser] = useContext(Context);
+  const [ setUser] = useContext(Context);
 
   useEffect(() => {
       getUser().then(currentUser => {
@@ -38,6 +39,7 @@ function App() {
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/login' exact component={LoginPage} />
+            <Route path='/profile' exact component={ProfilePage} />
             <Route path='/menu' exact component={Menu} />
             <Route path='/menu/:type' exact component={SelectedType}/>
             <Route path='/menu/details/:id' exact component={Details}/>

@@ -1,6 +1,6 @@
 const url = `http://localhost:5001/`;
 const urlMenu = `http://localhost:5001/menu/`;
-const urlCart = `http://localhost:5001/cart/`;
+
 
 export const addSushi = ( sushiData ) => {
     return fetch(url + 'add', {
@@ -62,5 +62,3 @@ export const finishOrder = ( userId, finalPrice ) => {
         headers: {'Content-type': 'application/json'}
     }).then(res => res.json())
 }
-
-
