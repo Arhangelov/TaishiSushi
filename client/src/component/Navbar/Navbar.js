@@ -1,10 +1,11 @@
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {logout} from '../../services/Logout';
 
 //Styles
-import {NavLink, Nav, NavUser, NavLogo, Container, IconCart} from './NavbarElements';
+import {NavLink, Nav, NavUser, NavLogo, Container} from './NavbarElements';
 import { ReactComponent as Logo } from '../../resources/Logo.svg';
+import { animateScroll as scroll } from 'react-scroll'
 
 //Contexts
 import { Context } from '../../Context/UserContext';
@@ -23,11 +24,16 @@ const Navbar = () => {
      const checkAdmin = (id) => {
          const adminId = '60d0f1dcdbc74d4808424e95';
          
-         if(id == adminId) return  <NavLink to='/add'>+ADD</NavLink>
+         if(id === adminId) return  <NavLink to='/add'>+ADD</NavLink>
          return '';
      };
 
      const items = useCart();
+
+     const scrollToContacts = () => {
+         scroll.scrollToBottom();
+         
+     } 
     
     return (
         <Container>
@@ -40,9 +46,9 @@ const Navbar = () => {
         </NavLogo>
 
             <Nav>
-                <NavLink to='/order-now'>ORDER NOW</NavLink>
+                <NavLink to='/about-us'>ABOUT US</NavLink>
                 <NavLink to='/menu'>MENU</NavLink>
-                <NavLink to='/contact-us'>CONTACT US</NavLink>
+                <button onClick={scrollToContacts}>CONTACTS</button>
             </Nav>
 
             <NavUser>
@@ -51,8 +57,8 @@ const Navbar = () => {
               {user.username
                 ?  <>
                     <NavLink to='' onClick={handlerLogout}>LOGOUT</NavLink>
-                    <NavLink to='/profile'>{user.username}</NavLink>
-                    <NavLink to='/cart'><i className="fas fa-shopping-cart"/> ({items.length})</NavLink>
+                    <NavLink to='/profile'>Welcome <strong>{user.username}</strong></NavLink>
+                    <NavLink to='/cart'><i className="fas fa-shopping-cart"/> {items.length}</NavLink>
                     </>
                  : <>
                     <NavLink to='/register'>REGISTER</NavLink>

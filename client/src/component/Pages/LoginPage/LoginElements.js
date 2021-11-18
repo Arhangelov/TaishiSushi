@@ -8,29 +8,35 @@ export const FormTitle = styled.h2`
 `
 
 export const Container = styled.div`
-  position: absolute;
+  display:flex;
+  position: relative;
 
-  width: 100vw;
+  width: 100%;
   height:100vh;
+  top: -75px;
 
   text-align: center;
  
-
   font-family: Montserrat;
   font-style: light;
   font-weight: normal;
   background: linear-gradient(#141e30, #243b55);
   background-position: top left;
+  /* border: 50px solid #243b55; */
   /* border-radius: 20%; */
+  justify-content: center;
+  align-items: center;
   `
   
 export const Form = styled.form`
   background: rgba(0,0,0,.5);
   padding-top: 1%;
-  width: 25vw;
-  height: 50vh;
-  margin-left:36%;
-  margin-top:45%;
+  width: 35%;
+  height: 50%;
+  /* margin-left:33%; */
+  /* margin-top:15%; */
+  padding-top: 5%;
+
 
   box-shadow: 0 15px 15px #1B1B1B;
   // background: linear-gradient(#141e30, #243b55);

@@ -8,7 +8,6 @@ import {
   Label,
 } from "./LoginElements";
 
-import { auth } from "../../../utils/firebase";
 import { Context } from "../../../Context/UserContext";
 
 const Login = ({ history }) => {
@@ -27,7 +26,9 @@ const Login = ({ history }) => {
       .then((res) => res.json())
       .then((response) => {
         if (response.message) throw new Error(response.message);
-        setUser({ _id: response._id, username: response.username });
+        const newUser = { _id: response._id, username: response.username };
+        setUser(newUser);
+        localStorage.setItem("user", JSON.stringify(newUser));
         history.push("/");
       })
       .catch((err) => {

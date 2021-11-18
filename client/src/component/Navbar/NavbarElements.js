@@ -19,6 +19,22 @@ export const Nav = styled.nav`
   width: 100%;
   left: 51px;
   margin-top: 1.5%;
+
+  button {
+    color: #e1b486;
+    border:none;
+    background-color:transparent;
+    font-style: light;
+    font-weight: normal;
+    font-size: 0.8em;
+
+    line-height: 2rem;
+    align-items: left;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 2em;
+    /* height: 25px; */
+  }
 `;
 
 export const NavUser = styled.nav`
@@ -53,6 +69,8 @@ export const NavLink = styled(Link)`
   cursor: pointer;
   padding-left: 2em;
   height: 50px;
+
+  
 
   @media screen and (max-width: 400px) {
     position: absolute;

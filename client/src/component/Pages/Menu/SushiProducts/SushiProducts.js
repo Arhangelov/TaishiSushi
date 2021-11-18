@@ -1,4 +1,5 @@
 import { useRef, useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import VanillaTilt from 'vanilla-tilt';
 import { pushToCart } from '../../../../services/sushiService';
 
@@ -34,14 +35,19 @@ function Tilt(props) {
 
 //Component
 export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
-    const [user, setUser] = useContext(Context);
+    const history = useHistory();
+    const [user] = useContext(Context);
     const [qty, setQty] = useState(1);
     const sushiData = {id, title, imageUrl, price}
     const dispatch = useDispatchCart();
 
     const addToCart = (sushi, userId, currQty) => {
-        dispatch({ type: 'ADD', sushi})
-        pushToCart(sushi, userId, currQty)
+        if(user.username === '') {
+            history.push('/login');
+        } else {
+            dispatch({ type: 'ADD', sushi})
+            pushToCart(sushi, userId, currQty)
+        }
     };
 
     //Tilt options

@@ -1,21 +1,25 @@
 import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Context } from '../../../Context/UserContext';
 import { getHistoryOrders, historyToCart } from '../../../services/profileService';
 
-const Profile = () => {
+const Profile = ({ history }) => {
     const [user] = useContext(Context);
-    const [history, setHistory] = useState([]);
+    const [historyOrder, setHistoryOrder] = useState([]);
     
     //Getting history of orders -----------------------------------------------
     useEffect(() => {
         getHistoryOrders(user._id)
-            .then(histOrders => setHistory(histOrders))
+            .then(order => setHistoryOrder(order))
     }, [user]);
 
     const orderHandler = (cart, userId) => {
         historyToCart(cart, userId)
-            .then(cart => console.log(cart))
+            .then(cart => {
+                console.log(cart);
+                history.push('/cart');
+            })
     }
 
     return (
@@ -24,13 +28,13 @@ const Profile = () => {
 
             <h3>My Orders</h3>
             <hr/>
-            {history.map((order) => 
+            {historyOrder.map((order) => 
                 <tbody key={order.id}>
                 <tr>
                     <td>{order.currDate}</td>
                     <td>{order.cart.map((sushi) => sushi.title + ', ')}</td>
                     <td>{order.finalPrice}</td>
-                    <button onClick={orderHandler.bind(this, order.cart, user._id)}>Order again</button>
+                    <button onClick={orderHandler.bind(this, order.cart, user._id)}>Order Again</button>
                     <hr/>
                     
                 </tr>

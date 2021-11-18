@@ -6,7 +6,7 @@ import { HeroContainer, HeroImg, Name, WelcomeIn } from './HeroElements';
 const Hero = () => {
     return (
         <HeroContainer>
-            <HeroImg src={ImgBG} alt='Sushi Bar' />
+            {/* <HeroImg src={ImgBG} alt='Sushi Bar' /> */}
             {/* <Japan>よ う こ そ</Japan> */}
             <WelcomeIn>WELCOME IN</WelcomeIn>
             <Name>TAISHI SUSHI</Name>

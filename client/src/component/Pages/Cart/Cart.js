@@ -22,6 +22,7 @@ const Cart = () => {
     useEffect(() => {
         getUserCart(user._id)
           .then(res => {
+              console.log(res);
             dispatch({ type: 'UPDATE', sushi: res });
             })
           .catch((error) => console.log(error.message));
@@ -71,13 +72,13 @@ const Cart = () => {
                     <th colSpan='4'>Shopping Cart</th>
                 </tr>
             </thead>
-                {(cart.length == 0 ?
+                {(cart.length === 0 ?
                      'The cart is empty' : 
                      cart.map((sushi) => 
                      
                         <tbody key={sushi.id}>
                             <tr>
-                                <td><img src={sushi.imageUrl} alt='Product Image' width='80' height='55'></img></td>
+                                <td><img src={sushi.imageUrl} alt='Sushi Product' width='80' height='55'></img></td>
                                 <td>{sushi.title}</td>
                                 <td>{'x' + sushi.qty}</td>
                                 <td>{(sushi.price * sushi.qty).toFixed(2)+'BGN'}</td>

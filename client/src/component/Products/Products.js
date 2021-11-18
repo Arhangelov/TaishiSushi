@@ -37,7 +37,7 @@ const Products = ({ heading, match }) => {
                   <ProductTitle>{product.title}</ProductTitle>
                   <ProductDesc>{product.description}</ProductDesc>
                   <ProductPortion>{product.portion}</ProductPortion>
-                  <ProductPrice>{product.price}</ProductPrice>
+                  <ProductPrice>{product.price.toFixed(2) + 'BGN'}</ProductPrice>
                   <ProductButton>Add to cart</ProductButton>
                 </ProductInfo>
               </ProductCard>

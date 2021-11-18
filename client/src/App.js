@@ -7,6 +7,7 @@ import { Context } from './Context/UserContext';
 
 import Navbar from "./component/Navbar/Navbar";
 import HomePage from "./component/Pages/HomePage/HomePage";
+import AboutUs from "./component/Pages/AboutUs/AboutUs";
 import AddPage from "./component/Pages/AddPage/AddPage";
 import LoginPage from "./component/Pages/LoginPage/LoginPage";
 import ProfilePage from "./component/Pages/Profile/Profile";
@@ -38,6 +39,7 @@ function App() {
         <Navbar />
           <Switch>
             <Route path='/' exact component={HomePage} />
+            <Route path='/about-us' exact component={AboutUs} />
             <Route path='/login' exact component={LoginPage} />
             <Route path='/profile' exact component={ProfilePage} />
             <Route path='/menu' exact component={Menu} />
