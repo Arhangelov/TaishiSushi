@@ -8,8 +8,9 @@ const Hero = () => {
         <HeroContainer>
             {/* <HeroImg src={ImgBG} alt='Sushi Bar' /> */}
             {/* <Japan>よ う こ そ</Japan> */}
-            <WelcomeIn>WELCOME IN</WelcomeIn>
-            <Name>TAISHI SUSHI</Name>
+            {/* <img alt='Sushi Restoraunt' src={ImgBG}/> */}
+            {/* <WelcomeIn>WELCOME IN</WelcomeIn> */}
+            {/* <Name>TAISHI SUSHI</Name> */}
         </HeroContainer>
     )
 }

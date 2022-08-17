@@ -34,6 +34,8 @@ export const getSushiDetails = ( sushiId ) => {
 
 export const pushToCart = ( sushi, userId, qty ) => {
     const test = {...sushi, userId, qty}
+
+    console.log(test, "cart1")
     return fetch(urlMenu + 'add-to-cart', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

@@ -6,8 +6,8 @@ import Products from '../../Products/Products';
 const HomePage = () => {
     return (
         <>
-            <Hero />
-            <Products heading='Chose your favorite set' />
+            {/* <Hero /> */}
+            <Products heading='Choose your favorite set' />
         </>
     )
 }

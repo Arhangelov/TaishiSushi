@@ -2,9 +2,9 @@ import { useRef, useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import VanillaTilt from 'vanilla-tilt';
 import { pushToCart } from '../../../../services/sushiService';
-
+import toast, {Toaster} from 'react-hot-toast';
 //Context
-import{ useDispatchCart } from '../../../../Context/CartContext';
+import { CartContext } from '../../../../Context/CartContext';
 import { Context } from "../../../../Context/UserContext";
 
 //Styles
@@ -39,16 +39,28 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
     const [user] = useContext(Context);
     const [qty, setQty] = useState(1);
     const sushiData = {id, title, imageUrl, price}
-    const dispatch = useDispatchCart();
+    // const dispatch = useDispatchCart();
+    const [cart, setCart] = useContext(CartContext)
 
     const addToCart = (sushi, userId, currQty) => {
         if(user.username === '') {
-            history.push('/login');
+            toast.error('You must be logged in');
         } else {
-            dispatch({ type: 'ADD', sushi})
+            // dispatch({ type: 'ADD', sushi})
+            setCart((cart) => cart.push(sushi))
             pushToCart(sushi, userId, currQty)
+            .then()
         }
     };
+
+    //Notification
+    const notify = () => toast.success(`You successfully add product to cart`,{
+        style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+        }
+    });
 
     //Tilt options
     const options = {
@@ -60,7 +72,7 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
 
     //Decrement logic
     const decrement = () => {
-        if(!qty == 1)
+        if(!qty === 1)
             setQty(qty - 1)
     }
 
@@ -71,6 +83,7 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
 
     return (
         <> 
+        <Toaster/>
         <Tilt options={options}>
             <Card to={`/menu/details/${id}`}>
                 <SetImage src={imageUrl} alt={`${title}`} />
@@ -83,7 +96,7 @@ export const  SushiProducts = ( { id, title, imageUrl, portion, price } ) => {
                     <SetQty value={qty}></SetQty>
                     <Increment onClick={increment}>+</Increment>
                 </QtyDiv>
-                <CartBtn onClick={() => addToCart(sushiData, user._id, qty)}>Add to Cart</CartBtn>
+                <CartBtn onClick={() => {addToCart(sushiData, user._id, qty); notify() }}>Add to Cart</CartBtn>
         </Tilt>
         </>
     )

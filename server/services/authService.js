@@ -14,7 +14,7 @@ const register = async ({email, username, password, address}) => {
     if (!validEmail.test(email)) throw { message: "Email should be valid."};
     if ((!englishPattern.test(username)) || (username.length < 4)) throw { message:"Username should be at least 4 characters long and should contains only english letters and digits."};
     if (!englishPattern.test(address)) throw { message:"Address should be at least 4 characters long and should contains only english letters and digits."};
-    if(!validPassword.test(password)) throw { message: "Password must be at least 9 characters long, must have at least 1 symbol, at least 1 uppercase and 1 lowercase."};
+    if (!validPassword.test(password)) throw { message: "Password must be at least 9 characters long, must have at least 1 symbol, at least 1 uppercase and 1 lowercase."};
 
     let user = await new User({ email, username, password, address }).save();
 
@@ -31,8 +31,7 @@ const register = async ({email, username, password, address}) => {
 
 const login = async ({ email, password }) => {
   let user = await User.findOne({ email });
-    console.log(user);
-    console.table(user.password);
+
 
   if (!user) throw { message: "No such user", status: 404 };
 

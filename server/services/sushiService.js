@@ -19,28 +19,30 @@ async function getDetails (id) {
 };
 
 async function addToCart (data) {
+   
     const user = await User.findById(data.userId);
     
     delete data.userId;
     
-    const currentSushi = user.cart.find(s => s.title === data.title);
+    const currentSushi = user.cart.find(s => s.id === data.id);
     
     if(currentSushi) {
         user.cart.remove(currentSushi);
         currentSushi.qty += data.qty;
         user.cart.push(currentSushi);
-
+        
     } else {
         user.cart.push(data)
     }
-
-    return user.save(); 
+    
+    user.save();
+    return user.cart; 
 };
 
 async function getUserCart(userId) {
 
     const user = await User.findById(userId)
-
+    
     return user.cart
 };
 

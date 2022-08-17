@@ -4,6 +4,9 @@ import { useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import {getUser} from './services/getUser';
 import { Context } from './Context/UserContext';
+import { CartContext } from "./Context/CartContext";
+import { getUserCart } from "./services/sushiService";
+import toast, { Toaster } from 'react-hot-toast';
 
 import Navbar from "./component/Navbar/Navbar";
 import HomePage from "./component/Pages/HomePage/HomePage";
@@ -22,20 +25,36 @@ import TakenOrder from './component/Pages/TakenOrder/TakenOrder';
 
 
 function App() {
-
-  const [ setUser] = useContext(Context);
-
+  const [user, setUser] = useContext(Context);
+  const [cart, setCart] = useContext(CartContext)
+  console.log(cart)
   useEffect(() => {
       getUser().then(currentUser => {
 
           setUser({_id: currentUser._id, username: currentUser.username})
+          toast.success(`Welcome ${currentUser.username}!`)
     
-      }).catch(err => console.log(err))
+      }).catch(err => toast.error(`${err.massage}`, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          }
+      }))
   }, [setUser])
+
+  useEffect(() => {
+    if (user && user._id) {
+      getUserCart(user._id).then((userCart) =>
+        setCart(userCart)
+      );
+    }
+  }, [user]);
 
 
   return (
     <div name="App">
+      <Toaster/>
         <Navbar />
           <Switch>
             <Route path='/' exact component={HomePage} />

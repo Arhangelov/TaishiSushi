@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 export const HeroContainer = styled.div`
   top: 0%;
-  position: absolute;
+  position: relative;
   justify-content: center;
   align-items:center;
   text-align:center;

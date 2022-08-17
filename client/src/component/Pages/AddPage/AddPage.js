@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import {addSushi} from '../../../services/sushiService'
 import {
   FormTitle,
@@ -21,11 +22,26 @@ const Form = () => {
     e.preventDefault()
 
     addSushi({title, description, type, portion, price, imageUrl})
-    .then(res => console.log(res))
+    .then(toast.success('You successfully add new product in to the base', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        }
+    }))
+    .catch(err => toast.error(`${err.massage}`, {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        }
+      }
+    ))
   }
 
   return (
     <Container>
+      <Toaster/>
       <FormStyled onSubmit={onSubmitHandler}>
         <FormTitle>Create Sushi</FormTitle>
         <Input onChange={e => setTitle(e.target.value)} value={title} name="title" placeholder="Title" />

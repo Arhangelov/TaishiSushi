@@ -4,10 +4,10 @@ import { NavLink as Link } from "react-router-dom";
 export const Container = styled.div`
   display: flex;
   background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
+  /* overflow: hidden; */
   position: -webkit-sticky;
   position: sticky;
-  z-index: 1;
+  /* z-index: 1; */
   backdrop-filter: blur(5px);
 `;
 

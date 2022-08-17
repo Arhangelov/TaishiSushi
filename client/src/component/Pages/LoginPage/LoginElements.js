@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   width: 100%;
   height:100vh;
-  top: -75px;
+  /* top: -75px; */
 
   text-align: center;
  
@@ -40,7 +40,7 @@ export const Form = styled.form`
 
   box-shadow: 0 15px 15px #1B1B1B;
   // background: linear-gradient(#141e30, #243b55);
-  background: linear-gradient(360deg, #070607 0%, #1F1E1H 100%);
+  /* background: linear-gradient(360deg, #070607 0%, 0deg, #1F1E1H 100%); */
 `
 
 export const Input = styled.input`

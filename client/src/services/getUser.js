@@ -1,8 +1,9 @@
 import url from "../utils/connectionUrl";
 export const getUser = async () => {
   const savedUser = JSON.parse(localStorage.getItem("user"));
+  console.log(savedUser);
   if (savedUser && savedUser._id) {
-    const userobj = await fetch(`${url}/api/auth/user/${savedUser._id}`, {
+    const userobj = await fetch(`${url}/auth/user/${savedUser._id}`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

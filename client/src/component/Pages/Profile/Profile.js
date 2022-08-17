@@ -16,10 +16,7 @@ const Profile = ({ history }) => {
 
     const orderHandler = (cart, userId) => {
         historyToCart(cart, userId)
-            .then(cart => {
-                console.log(cart);
-                history.push('/cart');
-            })
+            .then(history.push('/cart'))
     }
 
     return (

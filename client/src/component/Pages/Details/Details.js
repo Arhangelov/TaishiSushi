@@ -1,7 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { getSushiDetails } from '../../../services/sushiService';
 import VanillaTilt from 'vanilla-tilt';
+import toast, { Toaster } from 'react-hot-toast';
+import { Context } from '../../../Context/UserContext';
+// import { useDispatchCart } from '../../../Context/CartContext'
 
+
+import { pushToCart } from '../../../services/sushiService';
 import {
     Container,
     SushiImg,
@@ -14,10 +19,12 @@ import {
 export const Details = ({ match }) => {
     const sushiId = match.params.id;
     const [sushi, setSushi] = useState([]);
+    const [user] = useContext(Context);
+    // const dispatch = useDispatchCart();
 
     useEffect(() => {
         getSushiDetails(sushiId)
-            .then(res => {console.log(res); setSushi(res)})
+            .then(res =>  setSushi(res))
             .catch(error => console.log(error.message));
     },[]);
 
@@ -32,8 +39,27 @@ export const Details = ({ match }) => {
         return <div ref={tilt} {...rest} /> ;
     };
 
-    const addToCart = (sushi) => {
-        console.log(sushi);
+    const addToCart = (sushi, userId) => {
+        const sushiItem = {
+            _id: sushi._id,
+            title: sushi.title,
+            imageUrl: sushi.imageUrl,
+            price: sushi.price,
+        }
+        const qty = 1;
+
+        // dispatch({ type: 'ADD', sushiItem});
+        pushToCart(sushiItem, userId, qty)
+            .then(toast.success(`You successfully add product to cart`,{
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                }
+            }))
+            .catch(err => {
+                toast.error(`${err.message}`)
+            })
     };
 
 
@@ -53,7 +79,7 @@ export const Details = ({ match }) => {
             <SushiTitle>{`${sushi.title}`}</SushiTitle>
             <SushiDesc>{`${sushi.description}`}</SushiDesc>
             <SushiPortion>{`${sushi.portion}`}</SushiPortion>
-            <CartBtn onClick = {() => addToCart(sushi)}>Add to Cart</CartBtn>
+            <CartBtn onClick = {() => addToCart(sushi, user._id)}>Add to Cart</CartBtn>
         </Container>
         </Tilt>
 

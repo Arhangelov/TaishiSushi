@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react' 
+import { Container } from './AboutUsElements'
 
 const AboutUs = () => {
     return (
-        <>
+        <Container>
             <article>
                 <h3>TASTE IS A FEELING</h3>
                 <p>The cozy atmosphere, delicious food and incredible experience are only a part of Taishi Japanese Food and Garden.</p>
@@ -12,7 +13,7 @@ const AboutUs = () => {
                 <p>The literal translation of the hieroglyph “umami” means astonishing taste. But it also more of everything else. Umami is a …. true feast for the senses</p>
             </article>
            
-        </>
+        </Container>
     )
 }
 

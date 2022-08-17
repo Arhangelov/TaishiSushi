@@ -27,12 +27,12 @@ export const Background = styled.div`
   width: 100%;
   margin: 0;
   padding-top: 60px;
-  background: linear-gradient(
+  /* background: linear-gradient(
       0deg,
       rgba(125, 56, 87, 1) 0%,
       rgba(255, 126, 58, 1) 100%
-    )
-    no-repeat top right;
+    ) */
+    /* no-repeat top, right; */
   @media only screen and (max-width: 580px) {
     padding-top: 130px;
   }
@@ -57,7 +57,7 @@ export const Container = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
-  background: linear-gradient(0deg, rgba(125,56,87,1) 0%, rgba(255,126,58,1) 100%);
+  /* background: linear-gradient(0deg, rgba(125,56,87,1) 0%, rgba(255,126,58,1) 100%); */
   /* padding: 10px;
   display: flex;
   flex-wrap: wrap;

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { Redirect } from "react-router";
 import { Context } from "../../../Context/UserContext";
 import {
@@ -31,13 +32,23 @@ const Register = ({ history }) => {
       if (response.message) throw new Error(response.message);
       setUser({ _id: response._id, username: response.username });
       history.push("/");
-    }).catch(err => console.log(err.message));
+    }).catch(err =>{
+      toast.error(`${err.message}`, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          }
+      
+      })
+    });
 
     if(user.username) <Redirect to='/' /> 
   };
 
   return (
     <Container>
+      <Toaster/>
       <FormStyled onSubmit={onRegisterSubmitHandler}>
         <FormTitle>Register</FormTitle>
         <Label htmlFor="email">Email</Label>

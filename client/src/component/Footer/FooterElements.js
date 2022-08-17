@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// import cursorP from '../../resources/chopsticks-open2-com.svg'
 
 export const FooterEl = styled.footer`
     position:relative;
@@ -22,10 +23,13 @@ export const Container = styled.div`
     text-align: center;
     margin-top: -8vh;
     color: whitesmoke;
+
     a{
+
         text-decoration:none;
         color:#e1b486;
-        cursor: pointer;
-        
+        cursor: url(), auto;
     }
+        
+    
 `

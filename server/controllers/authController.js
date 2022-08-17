@@ -3,29 +3,38 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { SECRET, COOKIE_NAME } = require("../config/config");
 const {register, login} = require('../services/authService');
-// TODO validations: check if the user exists..., hashing the password with bcrypt, save the user, create jwt token
-// TODO1 res.cookie(cookieName, token, {httpOnly: true}).json(res.user)
 
-router.get("/isAuthenticated", (req, res) => {
-  const user = req.user;
-  
+
+router.get("/user/:userId", async (req, res) => {
+  const user = await User.findById(req.params.userId);
+
   if (user) {
     res.json(user);
   } else {
-    res.json({ message: "No user found" });
+    res.status(404).json();
   }
 });
+
+// router.get("/isAuthenticated", (req, res) => {
+//   const user = req.user;
+  
+//   if (user) {
+//     res.json(user);
+//   } else {
+//     res.json({ message: "No user found" });
+//   }
+// });
 
 router.post("/register", (req, res) => {
 
   register(req.body)
     .then(({user, token}) => {
-      console.log(user, token);
-
         if(!user) {
           res.clearCookie(COOKIE_NAME);
         } else {
-          res.status(201).cookie(COOKIE_NAME, token, {httpOnly: true}).json({user,token});
+          res.status(201)
+          .cookie(COOKIE_NAME, token, {httpOnly: true})
+          .json({user,token});
         }
 
   }).catch((err)=> {
@@ -42,13 +51,15 @@ router.post("/login", (req, res, next) => {
   
  login(req.body)
     .then((data) => {
-      res.status(200).cookie(COOKIE_NAME, data.token, {httpOnly: true, sameSite: true}).json(data.user)
+      res.status(200)
+      .cookie(COOKIE_NAME, data.token, {httpOnly: true, sameSite: true})
+      .json(data.user)
     })
     .catch((err) => {
       res.json({
         status: 404,
         message: `${err.message}`,
-        type: "ERROR",
+        type: "User not found",
       });
     });
 });

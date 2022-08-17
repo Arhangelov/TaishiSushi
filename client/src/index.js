@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 //Contexts
 import { UserContext } from './Context/UserContext';
 import { CartProvider } from './Context/CartContext';
+// import store  from "./redux/store";
 
 ReactDOM.render(
   <React.StrictMode>

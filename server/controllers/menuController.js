@@ -56,10 +56,16 @@ router.post('/add-to-cart', (req, res) => {
 
     addToCart(req.body)
         .then(cart => {
-            console.log(cart);
             res.json(cart);
+        })
+        .catch((err) =>{
+            res.json({
+            status: 404,
+            message: `${err.message}`,
+            type: "ERROR",
+          });  
         });
-});
+    });
 
 router.get('/get-cart/:userId', (req, res) => {
 
@@ -75,6 +81,13 @@ router.post('/delete-from-cart/', (req, res) => {
         .then(cart => {
             res.json(cart)
         })
+        .catch(err => {
+            res.json({
+                status: 404,
+                message: `${err.message}`,
+                type: "ERROR",
+              });
+        })
 });
 
 router.post('/finish-order/:userId/:finalPrice', (req, res) => {
@@ -85,5 +98,6 @@ router.post('/finish-order/:userId/:finalPrice', (req, res) => {
         })
     
 })
+
 
 module.exports = router;

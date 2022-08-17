@@ -9,6 +9,7 @@ import {
 } from "./LoginElements";
 
 import { Context } from "../../../Context/UserContext";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -29,10 +30,23 @@ const Login = ({ history }) => {
         const newUser = { _id: response._id, username: response.username };
         setUser(newUser);
         localStorage.setItem("user", JSON.stringify(newUser));
+        // toast.success(`Successfully logged in with ${user.username}`, {
+        //   style: {
+        //     borderRadius: '10px',
+        //     background: '#333',
+        //     color: `#fff`,
+        //   }
+        // })
         history.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(`${err.message}`,{
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          }
+      })
       });
   };
 
@@ -45,6 +59,7 @@ const Login = ({ history }) => {
 
   return (
     <Container>
+      <Toaster/>
       <FormStyled onSubmit={onLoginFormSubmitHandler}>
         <FormTitle>Login</FormTitle>
         <Label htmlFor="email">Email</Label>

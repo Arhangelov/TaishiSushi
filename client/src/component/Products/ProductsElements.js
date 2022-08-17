@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const ProductsContainer = styled.div`
-    margin-top: 100vh;
+    /* margin-top: 100vh; */
     max-width: 100vw;
     min-height: 100vh;
-    padding: 5rem calc((100vw - 1300px) /2);
+    /* padding: 5rem calc((100vw - 1300px) /2); */
     background-color: #100C0B;
     color: #fff;
     `

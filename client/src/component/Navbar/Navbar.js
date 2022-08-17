@@ -1,11 +1,12 @@
 import {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {logout} from '../../services/Logout';
+import toast,{Toaster} from 'react-hot-toast';
 
 //Styles
 import {NavLink, Nav, NavUser, NavLogo, Container} from './NavbarElements';
 import { ReactComponent as Logo } from '../../resources/Logo.svg';
-import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll';
 
 //Contexts
 import { Context } from '../../Context/UserContext';
@@ -18,7 +19,13 @@ const Navbar = () => {
         return logout()
             .then(() => {
                 return setUser({username: '', _id: ''})
-            }).catch(err => console.log(err))
+            }).catch(err => toast.error(`${err.massage}`, {
+                style: {
+                  borderRadius: '10px',
+                  background: '#333',
+                  color: '#fff',
+                  }
+                }))
     };
 
      const checkAdmin = (id) => {
@@ -30,13 +37,14 @@ const Navbar = () => {
 
      const items = useCart();
 
-     const scrollToContacts = () => {
+     function scrollToContacts () {
          scroll.scrollToBottom();
          
      } 
     
     return (
         <Container>
+        <Toaster/>
         <NavLogo>
         <Link to="/">
             <Logo>
@@ -52,19 +60,18 @@ const Navbar = () => {
             </Nav>
 
             <NavUser>
-                {checkAdmin(user._id)}
-                
-              {user.username
-                ?  <>
+              {user.username ? (
+                   <>
+                    {checkAdmin(user._id)}
                     <NavLink to='' onClick={handlerLogout}>LOGOUT</NavLink>
                     <NavLink to='/profile'>Welcome <strong>{user.username}</strong></NavLink>
-                    <NavLink to='/cart'><i className="fas fa-shopping-cart"/> {items.length}</NavLink>
+                    <NavLink to='/cart'><i className="fas fa-shopping-cart"/> {items?.length}</NavLink>
                     </>
-                 : <>
+                 ):( <>
                     <NavLink to='/register'>REGISTER</NavLink>
                     <NavLink to='/login'>LOGIN</NavLink>
                     </> 
-              }
+                )}
             </NavUser>
         </Container>
 

@@ -6,7 +6,6 @@ router.get("/", (req, res) => {
   getNewest()
     .then((sushi) => {
       res.status(200).json(sushi);
-      console.log(sushi);
     })
     .catch(() => res.json({ message: "Something went wrong." }));
 });
